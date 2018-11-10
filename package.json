@@ -1,0 +1,49 @@
+{
+  "name": "unroll-element",
+  "version": "0.0.0",
+  "description": "unroll react elements using your own host element resolver",
+  "license": "MIT",
+  "repository": "justinvdm/unroll-element",
+  "author": {
+    "name": "justinvdm",
+    "email": "justnvdm@gmail.com"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "test": "npm run lint npm run unit",
+    "unit": "tape -r @babel/register test.js",
+    "lint": "standard './**/*.js'",
+    "release": "np"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "unroll",
+    "resolve",
+    "react",
+    "element",
+    "jsx"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "eslint": "^5.9.0",
+    "np": "^3.0.4",
+    "prettier-standard": "^8.0.1",
+    "react": "^16.6.1",
+    "standard": "^12.0.1",
+    "tape": "^4.9.1"
+  },
+  "peerDependencies": {
+    "react": "*"
+  }
+}
