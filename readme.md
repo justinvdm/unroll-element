@@ -1,6 +1,6 @@
 # unroll-element
 
-[![Build Status](https://travis-ci.org/justinvdm/unroll-element?branch=master)](https://travis-ci.org/justinvdm/unroll-element)
+[![Build Status](https://travis-ci.org/justinvdm/unroll-element.svg?branch=master)](https://travis-ci.org/justinvdm/unroll-element)
 
 Simple utility for unrolling react elements with function-based components as their types. Useful when using jsx for static, non-react use cases (e.g. a pdf renderer).
 
