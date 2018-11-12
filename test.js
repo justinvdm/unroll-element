@@ -87,3 +87,15 @@ test('fragment-returning components', t => {
 
   t.end()
 })
+
+test('context', t => {
+  const res = unrollElement(
+    <foo />,
+    (el, content, context) => [el.type, context],
+    23
+  )
+
+  t.deepEquals(res, ['foo', 23])
+
+  t.end()
+})

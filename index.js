@@ -14,12 +14,12 @@
   var isArray = Array.isArray
   return unrollElement
 
-  function unrollElement (el, resolveFn) {
+  function unrollElement (el, resolveFn, context) {
     var type
     var children
 
     if (isArray(el)) {
-      return unrollElementList(el, resolveFn)
+      return unrollElementList(el, resolveFn, context)
     }
 
     if (!el || typeof el !== 'object') {
@@ -29,23 +29,27 @@
     type = el.type
 
     if (typeof type === 'function') {
-      return unrollElement(type(el.props), resolveFn)
+      return unrollElement(type(el.props), resolveFn, context)
     }
 
     children = el.props.children
 
     if (type && type.toString() === 'Symbol(react.fragment)') {
-      return unrollElement(children, resolveFn)
+      return unrollElement(children, resolveFn, context)
     }
 
-    return resolveFn(el, flatten(unrollElement(children, resolveFn)))
+    return resolveFn(
+      el,
+      flatten(unrollElement(children, resolveFn, context)),
+      context
+    )
   }
 
-  function unrollElementList (els, resolveFn) {
+  function unrollElementList (els, resolveFn, context) {
     var n = els.length
     var i = -1
     var res = []
-    while (++i < n) res.push(unrollElement(els[i], resolveFn))
+    while (++i < n) res.push(unrollElement(els[i], resolveFn, context))
     return new List(res)
   }
 
