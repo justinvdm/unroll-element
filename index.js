@@ -17,10 +17,13 @@
   function unrollElement (el, resolveFn, context, i) {
     var type
     var children
-    el = flatten(el)
 
     if (isArray(el)) {
-      return unrollElementList(el, resolveFn, context, null)
+      return unrollElementList(flatten(el), resolveFn, context, null)
+    }
+
+    if (isFragment(el)) {
+      return unrollElement(el.props.children, resolveFn, context, i)
     }
 
     if (!el || typeof el !== 'object') {
@@ -62,10 +65,6 @@
       } else {
         res.push(obj)
       }
-    }
-
-    if (res.length === 1 && !isArray(rootObj)) {
-      return res[0]
     }
 
     return res
