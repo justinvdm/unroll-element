@@ -5,8 +5,8 @@ const test = require('tape')
 const unrollElement = require('.')
 
 const resolveFn = (el, content) => {
-  const { type: kind, props: { children: _children, ...props } } = el
-  return [kind, props, content]
+  const { props: { children: _children, ...props } } = el
+  return [el.type, props, content]
 }
 
 test('host elements', t => {
@@ -91,11 +91,43 @@ test('fragment-returning components', t => {
 test('context', t => {
   const res = unrollElement(
     <foo />,
-    (el, content, context) => [el.type, context],
+    (el, content, i, context) => [el.type, context],
     23
   )
 
   t.deepEquals(res, ['foo', 23])
+
+  t.end()
+})
+
+test('indices', t => {
+  const TestComponent = () => (
+    <React.Fragment>
+      <bar>2</bar>
+      <React.Fragment>
+        <baz>3</baz>
+        <quux>23</quux>
+      </React.Fragment>
+    </React.Fragment>
+  )
+
+  const testEl = (
+    <foo>
+      <TestComponent />
+    </foo>
+  )
+
+  const resolveFn = (el, content, i) => {
+    return [el.type, i, content]
+  }
+
+  const res = unrollElement(testEl, resolveFn)
+
+  t.deepEquals(res, [
+    'foo',
+    null,
+    [['bar', 0, '2'], ['baz', 1, '3'], ['quux', 2, '23']]
+  ])
 
   t.end()
 })

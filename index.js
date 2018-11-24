@@ -14,12 +14,13 @@
   var isArray = Array.isArray
   return unrollElement
 
-  function unrollElement (el, resolveFn, context) {
+  function unrollElement (el, resolveFn, context, i) {
     var type
     var children
+    el = flatten(el)
 
     if (isArray(el)) {
-      return unrollElementList(el, resolveFn, context)
+      return unrollElementList(el, resolveFn, context, null)
     }
 
     if (!el || typeof el !== 'object') {
@@ -29,61 +30,49 @@
     type = el.type
 
     if (typeof type === 'function') {
-      return unrollElement(type(el.props), resolveFn, context)
+      return unrollElement(type(el.props), resolveFn, context, null)
     }
 
-    children = el.props.children
-
-    if (type && type.toString() === 'Symbol(react.fragment)') {
-      return unrollElement(children, resolveFn, context)
-    }
-
-    return resolveFn(
-      el,
-      flatten(unrollElement(children, resolveFn, context)),
-      context
-    )
+    children = unrollElement(el.props.children, resolveFn, context, null)
+    return resolveFn(el, children, i == null ? null : i, context)
   }
 
-  function unrollElementList (els, resolveFn, context) {
+  function unrollElementList (els, resolveFn, _, context) {
     var n = els.length
     var i = -1
     var res = []
-    while (++i < n) res.push(unrollElement(els[i], resolveFn, context))
-    return new List(res)
+    while (++i < n) res.push(unrollElement(els[i], resolveFn, context, i))
+    return res
   }
 
-  function flatten (obj) {
-    if (!(obj instanceof List)) {
-      return obj
+  function isFragment (el) {
+    return el && el.type && el.type.toString() === 'Symbol(react.fragment)'
+  }
+
+  function flatten (rootObj) {
+    var pending = [rootObj]
+    var res = []
+    var obj
+
+    while ((obj = pending.pop())) {
+      if (isArray(obj)) {
+        pushManyBackwards(pending, obj)
+      } else if (isFragment(obj)) {
+        pending.push(obj.props.children)
+      } else {
+        res.push(obj)
+      }
     }
 
-    var res = []
-    var vals = obj.vals
-    var n = vals.length
-    var i = -1
-    var v
-
-    while (++i < n) {
-      v = vals[i]
-
-      if (v instanceof List) {
-        pushMany(res, flatten(v.vals))
-      } else {
-        res.push(v)
-      }
+    if (res.length === 1 && !isArray(rootObj)) {
+      return res[0]
     }
 
     return res
   }
 
-  function pushMany (collection, vals) {
-    var n = vals.length
-    var i = -1
-    while (++i < n) collection.push(vals[i])
-  }
-
-  function List (vals) {
-    this.vals = vals
+  function pushManyBackwards (collection, vals) {
+    var i = vals.length
+    while (i--) collection.push(vals[i])
   }
 })
