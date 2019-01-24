@@ -40,7 +40,7 @@
     return resolveFn(el, children, i == null ? null : i, context)
   }
 
-  function unrollElementList (els, resolveFn, _, context) {
+  function unrollElementList (els, resolveFn, context) {
     var n = els.length
     var i = -1
     var res = []

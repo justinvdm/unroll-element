@@ -90,12 +90,19 @@ test('fragment-returning components', t => {
 
 test('context', t => {
   const res = unrollElement(
-    <foo />,
-    (el, content, i, context) => [el.type, context],
+    <foo>
+      <bar />
+      <baz />
+    </foo>,
+    (el, content, i, context) => [el.type, context, content],
     23
   )
 
-  t.deepEquals(res, ['foo', 23])
+  t.deepEquals(res, [
+    'foo',
+    23,
+    [['bar', 23, undefined], ['baz', 23, undefined]]
+  ])
 
   t.end()
 })
