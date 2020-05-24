@@ -52,7 +52,7 @@ const unrollElement = require('unroll-element')
 It can also be used a `<script>` if necessary:
 
 ```html
-<script crossorigin src="https://unpkg.com/unroll-element/umd/unroll-element.js"></script>
+<script crossorigin src="https://unpkg.com/unroll-element/dist/umd/unroll-element.js"></script>
 
 <script>
 unrollElement(...)
