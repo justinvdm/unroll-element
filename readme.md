@@ -31,6 +31,30 @@ An optional `context` can be given to `unrollElement`, which is then passed as a
 
 ## install
 
+You can use this library as the npm package `unroll-element`:
+
 ```
-npm install unroll-element
+npm i unroll-element
+# or
+yarn add unroll-element
+```
+
+It can be used in both es-module-aware and commonjs bundlers/environments.
+
+```js
+// es module
+import unrollElement from 'unroll-element'
+
+// commonjs
+const unrollElement = require('unroll-element')
+```
+
+It can also be used a `<script>` if necessary:
+
+```html
+<script crossorigin src="https://unpkg.com/unroll-element/umd/unroll-element.js"></script>
+
+<script>
+unrollElement(...)
+</script>
 ```
