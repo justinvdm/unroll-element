@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.5](https://github.com/justinvdm/unroll-element/compare/v0.3.4...v0.3.5) (2020-05-24)
+
+
+### Features
+
+* **esm:** Add esm wrapper ([16d6b7f](https://github.com/justinvdm/unroll-element/commit/16d6b7f7dfbe26e66c166a254ca784920c586dfe))
+
 ### [0.3.4](https://github.com/justinvdm/unroll-element/compare/v0.3.3...v0.3.4) (2020-05-24)
 
 
