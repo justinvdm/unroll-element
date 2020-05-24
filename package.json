@@ -1,6 +1,6 @@
 {
   "name": "unroll-element",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "unroll react elements using your own host element resolver",
   "license": "MIT",
   "repository": "justinvdm/unroll-element",
