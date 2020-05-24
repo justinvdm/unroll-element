@@ -45,12 +45,14 @@
   "ava": {
     "babel": true
   },
+  "dependencies": {
+    "@types/react": "^16.9.35"
+  },
   "devDependencies": {
     "@oftherivier/tools": "0.1.36",
     "react": "16.13.1"
   },
   "peerDependencies": {
     "react": "*"
-  },
-  "dependencies": {}
+  }
 }
