@@ -6,6 +6,10 @@
   "repository": "justinvdm/unroll-element",
   "type": "commonjs",
   "main": "index.js",
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.js"
+  },
   "author": {
     "name": "justinvdm",
     "email": "justnvdm@gmail.com"
