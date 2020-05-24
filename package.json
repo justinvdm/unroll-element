@@ -40,7 +40,8 @@
   ],
   "oftherivier": {
     "type": "es5",
-    "src": "index.js"
+    "src": "index.js",
+    "libName": "unrollElement"
   },
   "renovate": {
     "extends": [
