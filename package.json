@@ -52,7 +52,7 @@
     "babel": true
   },
   "dependencies": {
-    "@types/react": "^16.9.35"
+    "@types/react": "^17.0.0"
   },
   "devDependencies": {
     "@oftherivier/tools": "0.1.42",
