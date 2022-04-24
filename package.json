@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@oftherivier/tools": "0.1.42",
-    "react": "16.13.1"
+    "react": "18.0.0"
   },
   "peerDependencies": {
     "react": "*"
